@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="90.0.4430.2400" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="CsvHelper" Version="27.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Minions\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Drivers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Files\" />
+    <Folder Include="Services\Files\Mappers\" />
+    <Folder Include="Models\VnDirect\" />
+    <Folder Include="Services\Converts\" />
+    <Folder Include="Models\CoPhieu69\" />
+    <Folder Include="Constants\Xpaths\" />
+    <Folder Include="Minions\VnDirect\" />
+    <Folder Include="Minions\CoPhieu68\" />
+    <Folder Include="Analysis\" />
+    <Folder Include="Constants\FileNames\" />
+    <Folder Include="Services\Selenium\" />
+  </ItemGroup>
+</Project>
