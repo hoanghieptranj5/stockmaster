@@ -38,10 +38,10 @@ namespace StockMaster.Minions.CoPhieu68
                 {
                     WebDriver.Url = CoPhieu68Xpath.GetCompanyListUrl(stcId, page);
 
-                    var rows = WebDriver.FindElements(By.XPath(CoPhieu68Xpath.CompanyTableRowXpath));
+                    var rows = SeleniumService.FindElementsByXpath(CoPhieu68Xpath.CompanyTableRowXpath);
                     foreach (var row in rows)
                     {
-                        var innerTds = row.FindElements(By.XPath(".//td"));
+                        var innerTds = SeleniumService.FindInnerElementsByXpath(row, ".//td");
                         stcCompanies.Add(new Company
                         {
                             Id = innerTds[1].Text,
