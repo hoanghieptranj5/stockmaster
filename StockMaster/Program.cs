@@ -23,10 +23,10 @@ namespace StockMaster
         {
             StartUp();
 
-            //var minion = new VnDirectMinion();
+            //var minion = new CoPhieu68Minion();
             //minion.Execute();
 
-            //StockFinder.CompareCurrentPriceWithRecommendedPrice();
+            StockFinder.CompareCurrentPriceWithRecommendedPrice();
         }
     }
 }

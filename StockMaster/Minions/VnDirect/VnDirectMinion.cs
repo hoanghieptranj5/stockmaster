@@ -8,6 +8,7 @@ using StockMaster.Minions.Xpaths.VnDirect;
 using StockMaster.Models.VnDirect;
 using StockMaster.Services.Converts;
 using StockMaster.Services.Files;
+using StockMaster.Services.FolderServices;
 
 namespace StockMaster.Minions
 {
@@ -30,7 +31,7 @@ namespace StockMaster.Minions
                                             .Builder()
                                             .UseObjectStrategy()
                                             .Build();
-                fileService.Write(Environment.CurrentDirectory + "/" + stockId + "_recommends.csv", items);
+                fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RECOMMENDS + "/" + stockId + ".csv", items);
             }
 
         }

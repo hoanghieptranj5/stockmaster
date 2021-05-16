@@ -7,6 +7,7 @@ using StockMaster.Minions.Xpaths.CoPhieu68;
 using StockMaster.Models.CoPhieu69;
 using StockMaster.Services.Converts;
 using StockMaster.Services.Files;
+using StockMaster.Services.FolderServices;
 
 namespace StockMaster.Minions.CoPhieu68
 {
@@ -22,7 +23,7 @@ namespace StockMaster.Minions.CoPhieu68
             var companies = GetAllCompanies();
             foreach (var innerCompanies in companies)
             {
-                fileService.Write(Environment.CurrentDirectory + "/" + stcId + "_companies.csv", innerCompanies);
+                fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + stcId + "_companies.csv", innerCompanies);
                 stcId++;
             }
         }
@@ -54,7 +55,7 @@ namespace StockMaster.Minions.CoPhieu68
                             ListedVolume = StringToNumberConverter.ConvertToDouble(innerTds[8].Text),
                             ForeignOwn = StringToNumberConverter.ConvertToDouble(innerTds[9].Text),
                             ForeignAllowedToBuy = StringToNumberConverter.ConvertToDouble(innerTds[10].Text),
-                            Price = StringToNumberConverter.ConvertToDouble(innerTds[11].Text),
+                            Price = StringToNumberConverter.ConvertToDouble(RemoveBraces(innerTds[11].Text)),
                             MarketCap = StringToNumberConverter.ConvertToDouble(innerTds[12].Text),
                             Chart = string.Empty
                         });
@@ -64,6 +65,12 @@ namespace StockMaster.Minions.CoPhieu68
             }
 
             return result;
+        }
+
+        private string RemoveBraces(string value)
+        {
+            var input = value.Substring(0, value.IndexOf("\n"));
+            return input;
         }
     }
 }

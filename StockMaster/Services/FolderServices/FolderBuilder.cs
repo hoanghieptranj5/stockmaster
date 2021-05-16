@@ -1,15 +1,16 @@
 ﻿using System;
+using static StockMaster.Services.FolderServices.FolderStructure;
 namespace StockMaster.Services.FolderServices
 {
     public class FolderBuilder
     {
         public FolderBuilder()
         {
-            var folders = new string[] { "resources", "data" };
+            var folders = new string[] { DATA, RESOURCES, RECOMMENDS };
             MakeFolders(folders);
         }
 
-        private void MakeFolders(string[] folders)
+        private static void MakeFolders(string[] folders)
         {
             foreach (var folder in folders)
             {

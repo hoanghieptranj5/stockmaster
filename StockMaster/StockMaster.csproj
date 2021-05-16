@@ -32,5 +32,6 @@
     <Folder Include="Services\Selenium\" />
     <Folder Include="Services\FolderServices\" />
     <Folder Include="Services\Logger\" />
+    <Folder Include="Services\Calculators\" />
   </ItemGroup>
 </Project>
