@@ -6,22 +6,30 @@ using StockMaster.Models.VnDirect;
 using StockMaster.Services.Calculators;
 using StockMaster.Services.Files;
 using StockMaster.Services.FolderServices;
+using StockMaster.Services.Logger;
 
 namespace StockMaster.Analysis
 {
     public class StockFinder
     {
+        private readonly ILoggerService _logger;
+
+        public StockFinder(ILoggerService logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// Works for HOSE only
         /// </summary>
-        public static void CompareCurrentPriceWithRecommendedPrice()
+        public void CompareCurrentPriceWithRecommendedPrice()
         {
             var fileService = new FileService.Builder().UseObjectStrategy().Build();
             var companies = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
 
             foreach (var company in companies)
             {
-                Console.WriteLine("Collecting data for stock " + company.Id);
+                _logger.Log("Collecting data for stock " + company.Id);
 
                 var recommendations = fileService
                     .Read<VnDirectRecommendationOfCompany>(
@@ -33,9 +41,9 @@ namespace StockMaster.Analysis
                 {
                     var percentageDiff = CalculatorService.ShowPercentageDifference(company.Price, recommend.Price);
                     var display = string.Format("{0}\t{1}\t{2}\t{3}", company.Price, recommend.Price, percentageDiff, recommend.CreatedDate);
-                    Console.WriteLine(display);
+                    _logger.Log(display);
                 }
-                Console.WriteLine();
+                _logger.Log("\n");
             }
         }
 

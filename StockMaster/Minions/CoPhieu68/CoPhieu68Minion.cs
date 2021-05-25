@@ -32,7 +32,7 @@ namespace StockMaster.Minions.CoPhieu68
         {
             var result = new List<List<Company>>();
 
-            for (var stcId = 1; stcId <= 3; stcId++)
+            for (var stcId = 1; stcId <= 1; stcId++)
             {
                 var stcCompanies = new List<Company>();
                 for (var page = 1; page <= 16; page++)
