@@ -14,6 +14,8 @@ namespace StockMaster
 {
     class Program
     {
+        #region Private Methods
+
         /// <summary>
         /// DO NOT DELETE
         /// this function setup all available resources
@@ -23,38 +25,22 @@ namespace StockMaster
             new FolderBuilder();
         }
 
-        static Task Main(string[] args)
-        {
-            StartUp();
+        #endregion
 
-            using IHost host = CreateHostBuilder(args).Build();
-            using IServiceScope serviceScope = host.Services.CreateScope();
-            var provider = serviceScope.ServiceProvider;
+        #region Static Methods
 
-            #region MainMethodGoesHere
-
-            //var minion = new CoPhieu68Minion();
-            //minion.Execute();
-
-            //var minion = new VnDirectMinion();
-            //minion.Execute();
-
-            var logger = provider.GetRequiredService<ILoggerService>();
-
-            var logic = new StockFinder(logger);
-            logic.CompareCurrentPriceWithRecommendedPrice();
-
-            #endregion
-
-            return host.RunAsync();
-        }
-
+        /// <summary>
+        /// Dependencies Injection Goes Here
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
                 {
                     services.AddScoped<StockFinder>();
+                    services.AddScoped<FileService>();
                     services.AddScoped<ILoggerService, FileLoggerService>();
                 });
         }
@@ -66,6 +52,37 @@ namespace StockMaster
 
             var logger = provider.GetRequiredService<ILoggerService>();
             logger.Log("Logger is ready for service.");
+        }
+
+        #endregion
+        
+        static Task Main(string[] args)
+        {
+            StartUp();
+
+            using IHost host = CreateHostBuilder(args).Build();
+            using IServiceScope serviceScope = host.Services.CreateScope();
+            var provider = serviceScope.ServiceProvider;
+
+            #region MainMethodGoesHere
+
+            // var minion = new CoPhieu68Minion();
+            // minion.Execute();
+            
+            var logger = provider.GetRequiredService<ILoggerService>();
+            var fileService = provider.GetRequiredService<FileService>();
+            
+            var logic = new StockFinder(logger, fileService);
+            var stockIds = logic.GetStockIds();
+            
+            var minion = new GetRecommendMinion(fileService, stockIds);
+            minion.Execute();
+            
+            logic.CompareCurrentPriceWithRecommendedPrice();
+
+            #endregion
+
+            return host.RunAsync();
         }
     }
 }

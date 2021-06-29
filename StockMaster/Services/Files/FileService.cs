@@ -10,9 +10,9 @@ namespace StockMaster.Services.Files
     {
         private IWriteFileStrategy _writeFileStrategy;
 
-        private FileService()
+        public FileService()
         {
-
+            _writeFileStrategy = new WriteByObjectStrategy();
         }
 
         public void Write<T>(string fileName, IEnumerable<T> entities)

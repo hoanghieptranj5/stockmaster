@@ -13,10 +13,12 @@ namespace StockMaster.Analysis
     public class StockFinder
     {
         private readonly ILoggerService _logger;
+        private readonly FileService _fileService;
 
-        public StockFinder(ILoggerService logger)
+        public StockFinder(ILoggerService logger, FileService fileService)
         {
             _logger = logger;
+            _fileService = fileService;
         }
 
         /// <summary>
@@ -24,14 +26,13 @@ namespace StockMaster.Analysis
         /// </summary>
         public void CompareCurrentPriceWithRecommendedPrice()
         {
-            var fileService = new FileService.Builder().UseObjectStrategy().Build();
-            var companies = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
+            var companies = _fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
 
             foreach (var company in companies)
             {
                 _logger.Log("Collecting data for stock " + company.Id);
 
-                var recommendations = fileService
+                var recommendations = _fileService
                     .Read<VnDirectRecommendationOfCompany>(
                     Environment.CurrentDirectory
                     + "/" + FolderStructure.RECOMMENDS
@@ -51,10 +52,9 @@ namespace StockMaster.Analysis
         /// HOSE only
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<string> GetStockIds()
+        public IEnumerable<string> GetStockIds()
         {
-            var fileService = new FileService.Builder().UseObjectStrategy().Build();
-            var records = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
+            var records = _fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
             var stockIds = from record in records
                            select record.Id;
 

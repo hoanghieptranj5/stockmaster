@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using OpenQA.Selenium;
 using StockMaster.Analysis;
 using StockMaster.Contracts;
@@ -15,23 +16,24 @@ namespace StockMaster.Minions
     /// <summary>
     /// Concrete Decorator
     /// </summary>
-    public class VnDirectMinion : MinionBase
+    public class GetRecommendMinion : MinionBase
     {
-        public VnDirectMinion()
+        private readonly FileService _fileService;
+        private IEnumerable<string> _stockIds;
+        
+        public GetRecommendMinion(FileService fileService, IEnumerable<string> stockIds)
         {
+            _fileService = fileService;
+            _stockIds = stockIds;
         }
 
         protected override void MainMethod()
         {
-            foreach (var stockId in StockFinder.GetStockIds())
+            foreach (var stockId in _stockIds)
             {
                 var items = GetCompanyRecommendationPrice(stockId);
-
-                var fileService = new FileService
-                                            .Builder()
-                                            .UseObjectStrategy()
-                                            .Build();
-                fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RECOMMENDS + "/" + stockId + ".csv", items);
+                _fileService.Write(Environment.CurrentDirectory 
+                                   + "/" + FolderStructure.RECOMMENDS + "/" + stockId + ".csv", items);
             }
 
         }
