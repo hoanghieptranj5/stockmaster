@@ -65,15 +65,15 @@ namespace StockMaster
             var provider = serviceScope.ServiceProvider;
 
             #region MainMethodGoesHere
-
-            // var minion = new CoPhieu68Minion();
-            // minion.Execute();
             
             var logger = provider.GetRequiredService<ILoggerService>();
             var fileService = provider.GetRequiredService<FileService>();
             
             var logic = new StockFinder(logger, fileService);
             var stockIds = logic.GetStockIds();
+            
+            // var minion = new StockInfoMinion();
+            // minion.Execute();
             
             var minion = new GetRecommendMinion(fileService, stockIds);
             minion.Execute();

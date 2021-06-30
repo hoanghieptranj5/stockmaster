@@ -11,7 +11,7 @@ using StockMaster.Services.FolderServices;
 
 namespace StockMaster.Minions.CoPhieu68
 {
-    public class CoPhieu68Minion : MinionBase
+    public class StockInfoMinion : MinionBase
     {
         protected override void MainMethod()
         {
