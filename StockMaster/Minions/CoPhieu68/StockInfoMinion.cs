@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using OpenQA.Selenium;
 using StockMaster.Contracts;
 using StockMaster.Minions.Xpaths.CoPhieu68;
@@ -13,17 +14,20 @@ namespace StockMaster.Minions.CoPhieu68
 {
     public class StockInfoMinion : MinionBase
     {
+        private readonly FileService _fileService;
+
+        public StockInfoMinion(FileService fileService)
+        {
+            _fileService = fileService;
+        }
+        
         protected override void MainMethod()
         {
-            var fileService = new FileService.Builder()
-                .UseObjectStrategy()
-                .Build();
-
             var stcId = 1;
             var companies = GetAllCompanies();
             foreach (var innerCompanies in companies)
             {
-                fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + stcId + "_companies.csv", innerCompanies);
+                _fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + stcId + "_companies.csv", innerCompanies);
                 stcId++;
             }
         }
