@@ -41,7 +41,7 @@ namespace StockMaster.Minions
         private IEnumerable<VnDirectRecommendationOfCompany> GetCompanyRecommendationPrice(string stockId)
         {
             var result = new List<VnDirectRecommendationOfCompany>();
-            WebDriver.Url = VnDirectXpath.GetRecommendationPriceForStock(stockId);
+            SeleniumService.GoTo(VnDirectXpath.GetRecommendationPriceForStock(stockId));
 
             SeleniumService.WaitFor(1);
 

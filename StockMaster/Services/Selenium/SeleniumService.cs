@@ -13,6 +13,16 @@ namespace StockMaster.Services.Selenium
             _webDriver = webDriver;
         }
 
+        public void GoTo(string url)
+        {
+            _webDriver.Url = url;
+        }
+
+        public void CloseDriver()
+        {
+            _webDriver.Close();
+        }
+
         public void WaitFor(int seconds)
         {
             _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);

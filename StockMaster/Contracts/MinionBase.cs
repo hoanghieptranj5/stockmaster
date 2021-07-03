@@ -10,18 +10,16 @@ namespace StockMaster.Contracts
     /// </summary>
     public abstract class MinionBase
     {
-        protected IWebDriver WebDriver { get; set; }
         protected SeleniumService SeleniumService { get; set; }
 
-        protected void SetUp()
+        private void SetUp()
         {
-            WebDriver = WebDriverSingleton.WebDriver;
-            SeleniumService = new SeleniumService(WebDriver);
+            SeleniumService = new SeleniumService(WebDriverSingleton.WebDriver);
         }
 
-        protected void TearDown()
+        private void TearDown()
         {
-            WebDriver.Close();
+            SeleniumService.CloseDriver();
         }
 
         protected abstract void MainMethod();

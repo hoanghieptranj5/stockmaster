@@ -41,7 +41,7 @@ namespace StockMaster.Minions.CoPhieu68
                 var stcCompanies = new List<Company>();
                 for (var page = 1; page <= 16; page++)
                 {
-                    WebDriver.Url = CoPhieu68Xpath.GetCompanyListUrl(stcId, page);
+                    SeleniumService.GoTo(CoPhieu68Xpath.GetCompanyListUrl(stcId, page));
 
                     var rows = SeleniumService.FindElementsByXpath(CoPhieu68Xpath.CompanyTableRowXpath);
                     foreach (var row in rows)

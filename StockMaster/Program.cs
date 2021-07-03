@@ -71,14 +71,14 @@ namespace StockMaster
             
             var logic = new StockFinder(logger, fileService);
             var stockIds = logic.GetStockIds();
-            
-            // var minion = new StockInfoMinion();
-            // minion.Execute();
-            
-            var minion = new GetRecommendMinion(fileService, stockIds);
+
+            var minion = new StockInfoMinion(fileService);
             minion.Execute();
             
-            logic.CompareCurrentPriceWithRecommendedPrice();
+            // var minion = new GetRecommendMinion(fileService, stockIds);
+            // minion.Execute();
+            //
+            // logic.CompareCurrentPriceWithRecommendedPrice();
 
             #endregion
 
