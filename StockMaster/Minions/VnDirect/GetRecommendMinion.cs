@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using OpenQA.Selenium;
-using StockMaster.Analysis;
 using StockMaster.Contracts;
 using StockMaster.Minions.Xpaths.VnDirect;
 using StockMaster.Models.VnDirect;

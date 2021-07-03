@@ -1,5 +1,4 @@
-﻿using System;
-namespace StockMaster.Services.Logger
+﻿namespace StockMaster.Services.Logger
 {
     public interface ILoggerService
     {

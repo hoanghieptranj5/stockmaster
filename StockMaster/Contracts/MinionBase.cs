@@ -1,6 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
-using StockMaster.Drivers;
+﻿using StockMaster.Drivers;
 using StockMaster.Services.Selenium;
 
 namespace StockMaster.Contracts

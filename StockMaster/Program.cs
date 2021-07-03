@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockMaster.Analysis;
-using StockMaster.Minions;
 using StockMaster.Minions.CoPhieu68;
 using StockMaster.Services.Files;
 using StockMaster.Services.FolderServices;

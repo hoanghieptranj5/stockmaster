@@ -20,7 +20,7 @@ namespace StockMaster.Services.Selenium
 
         public void CloseDriver()
         {
-            _webDriver.Close();
+            _webDriver?.Close();
         }
 
         public void WaitFor(int seconds)
