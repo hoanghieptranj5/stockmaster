@@ -8,8 +8,4 @@
       <ProjectReference Include="..\StockMaster\StockMaster.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Logic" />
-    </ItemGroup>
-
 </Project>
