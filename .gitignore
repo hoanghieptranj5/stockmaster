@@ -1,0 +1,7 @@
+/StockMaster/bin/Debug/net5.0/
+/StockMaster/obj/
+/StockMaster/obj/Debug
+/Cp68Minion/obj/Debug
+/Cp68Minion/bin/Debug
+*.idea
+/.vs/
