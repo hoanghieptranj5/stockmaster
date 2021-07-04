@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using OpenQA.Selenium;
+﻿using System.Collections.Generic;
 using StockMaster.Contracts;
 using StockMaster.Minions.Xpaths.CoPhieu68;
 using StockMaster.Models.CoPhieu69;
 using StockMaster.Services.Converts;
 using StockMaster.Services.Files;
-using StockMaster.Services.FolderServices;
 
 namespace StockMaster.Minions.CoPhieu68
 {
@@ -20,14 +15,14 @@ namespace StockMaster.Minions.CoPhieu68
         {
             _fileService = fileService;
         }
-        
+
         protected override void MainMethod()
         {
             var stcId = 1;
             var companies = GetAllCompanies();
             foreach (var innerCompanies in companies)
             {
-                _fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + stcId + "_companies.csv", innerCompanies);
+                _fileService.Write(StoreFileLocation.StcIds(stcId), innerCompanies);
                 stcId++;
             }
         }
@@ -65,6 +60,7 @@ namespace StockMaster.Minions.CoPhieu68
                         });
                     }
                 }
+
                 result.Add(stcCompanies);
             }
 
