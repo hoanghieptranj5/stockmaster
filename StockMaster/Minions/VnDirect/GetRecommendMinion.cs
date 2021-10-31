@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using StockMaster.Contracts;
 using StockMaster.Minions.Xpaths.VnDirect;
 using StockMaster.Models.VnDirect;
@@ -15,23 +16,26 @@ namespace StockMaster.Minions
     public class GetRecommendMinion : MinionBase
     {
         private readonly FileService _fileService;
-        private IEnumerable<string> _stockIds;
+        public IEnumerable<string> StockIds { get; set; }
         
-        public GetRecommendMinion(FileService fileService, IEnumerable<string> stockIds)
+        public GetRecommendMinion(FileService fileService)
         {
             _fileService = fileService;
-            _stockIds = stockIds;
         }
 
         protected override void MainMethod()
         {
-            foreach (var stockId in _stockIds)
+            if (!StockIds.Any())
+            {
+                throw new Exception("StockIds must not be null");
+            }
+            
+            foreach (var stockId in StockIds)
             {
                 var items = GetCompanyRecommendationPrice(stockId);
                 _fileService.Write(Environment.CurrentDirectory 
                                    + "/" + FolderStructure.RECOMMENDS + "/" + stockId + ".csv", items);
             }
-
         }
 
         private IEnumerable<VnDirectRecommendationOfCompany> GetCompanyRecommendationPrice(string stockId)

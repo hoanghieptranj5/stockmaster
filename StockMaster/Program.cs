@@ -42,6 +42,8 @@ namespace StockMaster
                 {
                     services.AddScoped<StockFinder>();
                     services.AddScoped<FileService>();
+                    services.AddScoped<GetRecommendMinion>();
+                    services.AddScoped<StockInfoMinion>();
                     services.AddScoped<ILoggerService, FileLoggerService>();
                     services.AddScoped<IAppLogic, AppLogic>();
                 });
@@ -67,7 +69,7 @@ namespace StockMaster
 
             // var ids = appLogic.CollectStockData();
             
-            // appLogic.CollectRecommendations(ids);
+            appLogic.CollectRecommendations();
             
             appLogic.ComparePriceAndRecommendations();
             

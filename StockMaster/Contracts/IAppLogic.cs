@@ -4,8 +4,8 @@ namespace StockMaster.Contracts
 {
     public interface IAppLogic
     {
-        IEnumerable<string> CollectStockData();
-        void CollectRecommendations(IEnumerable<string> stockIds);
+        void CollectStockData();
+        void CollectRecommendations();
         void ComparePriceAndRecommendations();
     }
 }
