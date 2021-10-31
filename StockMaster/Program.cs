@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockMaster.Analysis;
+using StockMaster.Contracts;
 using StockMaster.Minions;
 using StockMaster.Minions.CoPhieu68;
+using StockMaster.Services;
 using StockMaster.Services.Files;
 using StockMaster.Services.FolderServices;
 using StockMaster.Services.Logger;
@@ -41,16 +43,8 @@ namespace StockMaster
                     services.AddScoped<StockFinder>();
                     services.AddScoped<FileService>();
                     services.AddScoped<ILoggerService, FileLoggerService>();
+                    services.AddScoped<IAppLogic, AppLogic>();
                 });
-        }
-
-        static void ExemplifyScoping(IServiceProvider services, string scope)
-        {
-            using IServiceScope serviceScope = services.CreateScope();
-            var provider = serviceScope.ServiceProvider;
-
-            var logger = provider.GetRequiredService<ILoggerService>();
-            logger.Log("Logger is ready for service.");
         }
 
         #endregion
@@ -63,24 +57,20 @@ namespace StockMaster
             using IServiceScope serviceScope = host.Services.CreateScope();
             var provider = serviceScope.ServiceProvider;
 
+            #region Populate Services
+            
+            var appLogic = provider.GetRequiredService<IAppLogic>();
+
+            #endregion
+
             #region MainMethodGoesHere
-            
-            var logger = provider.GetRequiredService<ILoggerService>();
-            var fileService = provider.GetRequiredService<FileService>();
-            
-            
 
-            // var minion = new StockInfoMinion(fileService);
-            // minion.Execute();
+            // var ids = appLogic.CollectStockData();
             
-            var logic = new StockFinder(logger, fileService);
-            var stockIds = logic.GetStockIds();
+            // appLogic.CollectRecommendations(ids);
             
-            // var minion = new GetRecommendMinion(fileService, stockIds);
-            // minion.Execute();
+            appLogic.ComparePriceAndRecommendations();
             
-            logic.CompareCurrentPriceWithRecommendedPrice();
-
             #endregion
 
             return host.RunAsync();
