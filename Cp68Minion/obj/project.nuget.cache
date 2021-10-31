@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f7ucEMzS/FZ2wivW0pSnITiHHc5VP1Jo1WMuyjqgUKffewp9Hcvlncgxa13Nblfvu2FpwFvgdDSXs6oQS2CbZQ==",
+  "dgSpecHash": "EtaPz1ExhosW71hGNpcQWaENOJvcoI8HYECpBAYyKohtB/dwEwkIQ1d6harN8GzeOUsCSHCGmmotU4kILiaWCw==",
   "success": true,
   "projectFilePath": "/Users/hieptran/Projects/StockMaster/Cp68Minion/Cp68Minion.csproj",
   "expectedPackageFiles": [
@@ -56,7 +56,7 @@
     "/Users/hieptran/.nuget/packages/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/Users/hieptran/.nuget/packages/selenium.support/3.141.0/selenium.support.3.141.0.nupkg.sha512",
     "/Users/hieptran/.nuget/packages/selenium.webdriver/3.141.0/selenium.webdriver.3.141.0.nupkg.sha512",
-    "/Users/hieptran/.nuget/packages/selenium.webdriver.chromedriver/90.0.4430.2400/selenium.webdriver.chromedriver.90.0.4430.2400.nupkg.sha512",
+    "/Users/hieptran/.nuget/packages/selenium.webdriver.chromedriver/95.0.4638.5400/selenium.webdriver.chromedriver.95.0.4638.5400.nupkg.sha512",
     "/Users/hieptran/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/Users/hieptran/.nuget/packages/system.buffers/4.3.0/system.buffers.4.3.0.nupkg.sha512",
     "/Users/hieptran/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",

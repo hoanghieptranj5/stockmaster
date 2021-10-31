@@ -718,7 +718,7 @@
           "lib/netstandard2.0/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/90.0.4430.2400": {
+      "Selenium.WebDriver.ChromeDriver/95.0.4638.5400": {
         "type": "package",
         "build": {
           "build/_._": {}
@@ -1893,7 +1893,7 @@
           "Microsoft.Extensions.Hosting": "5.0.0",
           "Selenium.Support": "3.141.0",
           "Selenium.WebDriver": "3.141.0",
-          "Selenium.WebDriver.ChromeDriver": "90.0.4430.2400"
+          "Selenium.WebDriver.ChromeDriver": "95.0.4638.5400"
         },
         "compile": {
           "bin/placeholder/StockMaster.dll": {}
@@ -2943,20 +2943,21 @@
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/90.0.4430.2400": {
-      "sha512": "poYw2JgVJ8obMYUSnfuucxQMrMusQiA3H2dXhw3bOaFm/bweTEAvhK8RVq+5zfjmTaj7COMYfIjhWJU0rPUabQ==",
+    "Selenium.WebDriver.ChromeDriver/95.0.4638.5400": {
+      "sha512": "v2mGsXpp1OdGINGwDC9qZWZcVyfFya4Bh6JmA5Jg6KuLLlOmArpPWT7+VvNCLC0LVjGcvJ96V9ManQa8Xcffeg==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/90.0.4430.2400",
+      "path": "selenium.webdriver.chromedriver/95.0.4638.5400",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "README.md",
         "build/DefinePropertiesChromeDriver.targets",
         "build/Selenium.WebDriver.ChromeDriver.targets",
         "driver/linux64/chromedriver",
         "driver/mac64/chromedriver",
         "driver/win32/chromedriver.exe",
         "nupkg-icon.png",
-        "selenium.webdriver.chromedriver.90.0.4430.2400.nupkg.sha512",
+        "selenium.webdriver.chromedriver.95.0.4638.5400.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -6559,7 +6560,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
       }
     }
   }

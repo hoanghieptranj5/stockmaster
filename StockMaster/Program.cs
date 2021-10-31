@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockMaster.Analysis;
+using StockMaster.Minions;
 using StockMaster.Minions.CoPhieu68;
 using StockMaster.Services.Files;
 using StockMaster.Services.FolderServices;
@@ -67,16 +68,18 @@ namespace StockMaster
             var logger = provider.GetRequiredService<ILoggerService>();
             var fileService = provider.GetRequiredService<FileService>();
             
+            
+
+            // var minion = new StockInfoMinion(fileService);
+            // minion.Execute();
+            
             var logic = new StockFinder(logger, fileService);
             var stockIds = logic.GetStockIds();
-
-            var minion = new StockInfoMinion(fileService);
-            minion.Execute();
             
             // var minion = new GetRecommendMinion(fileService, stockIds);
             // minion.Execute();
-            //
-            // logic.CompareCurrentPriceWithRecommendedPrice();
+            
+            logic.CompareCurrentPriceWithRecommendedPrice();
 
             #endregion
 
