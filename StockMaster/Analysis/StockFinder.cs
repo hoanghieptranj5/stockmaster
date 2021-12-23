@@ -41,7 +41,7 @@ namespace StockMaster.Analysis
                 foreach (var recommend in recommendations)
                 {
                     var percentageDiff = CalculatorService.ShowPercentageDifference(company.Price, recommend.Price);
-                    var display = string.Format("{0}\t{1}\t{2}\t{3}", company.Price, recommend.Price, percentageDiff, recommend.CreatedDate);
+                    var display = string.Format("{0}\t{1}\t{2}\t{3}\t{4}", company.Price, recommend.Price, percentageDiff, recommend.CreatedDate, recommend.CompanyName);
                     _logger.Log(display);
                 }
                 _logger.Log("\n");

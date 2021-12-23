@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockMaster.Analysis;
@@ -66,11 +67,12 @@ namespace StockMaster
 
             #region MainMethodGoesHere
 
-            // var ids = appLogic.CollectStockData();
+            // appLogic.CollectStockData();
             
-            appLogic.CollectRecommendations();
+            // appLogic.CollectRecommendations();
             
             appLogic.ComparePriceAndRecommendations();
+            Console.WriteLine("Done ComparePriceAndRecommendations");
             
             #endregion
 
