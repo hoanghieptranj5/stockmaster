@@ -13,13 +13,13 @@ namespace StockMaster.Contracts
         protected IWebDriver WebDriver { get; set; }
         protected SeleniumService SeleniumService { get; set; }
 
-        protected void SetUp()
+        private void SetUp()
         {
             WebDriver = WebDriverSingleton.WebDriver;
             SeleniumService = new SeleniumService(WebDriver);
         }
 
-        protected void TearDown()
+        private void TearDown()
         {
             WebDriver.Close();
         }
