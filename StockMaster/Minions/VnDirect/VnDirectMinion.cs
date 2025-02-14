@@ -23,17 +23,17 @@ namespace StockMaster.Minions
 
         protected override void MainMethod()
         {
-            foreach (var stockId in StockFinder.GetStockIds())
+            foreach (var tickerId in StockFinder.GetTickerId())
             {
-                var items = GetCompanyRecommendationPrice(stockId);
+                var items = GetCompanyRecommendationPrice(tickerId);
 
                 var fileService = new FileService
-                                            .Builder()
-                                            .UseObjectStrategy()
-                                            .Build();
-                fileService.Write(Environment.CurrentDirectory + "/" + FolderStructure.RECOMMENDS + "/" + stockId + ".csv", items);
+                        .Builder()
+                    .UseObjectStrategy()
+                    .Build();
+                fileService.Write(
+                    Environment.CurrentDirectory + "/" + FolderStructure.RECOMMENDS + "/" + tickerId + ".csv", items);
             }
-
         }
 
         private IEnumerable<VnDirectRecommendationOfCompany> GetCompanyRecommendationPrice(string stockId)
@@ -47,9 +47,9 @@ namespace StockMaster.Minions
             foreach (var line in lines)
             {
                 var innerTds = SeleniumService.FindInnerElementsByXpath(
-                        line,
-                        VnDirectXpath.GetInnerElementXpath(VnDirectXpath.InnerTd)
-                    );
+                    line,
+                    VnDirectXpath.GetInnerElementXpath(VnDirectXpath.InnerTd)
+                );
 
                 var recommendItem = new VnDirectRecommendationOfCompany
                 {

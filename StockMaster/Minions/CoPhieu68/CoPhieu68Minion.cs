@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using OpenQA.Selenium;
 using StockMaster.Contracts;
 using StockMaster.Minions.Xpaths.CoPhieu68;
@@ -19,60 +20,53 @@ namespace StockMaster.Minions.CoPhieu68
                 .UseObjectStrategy()
                 .Build();
 
-            var stcId = 1;
             var companies = GetAllCompanies();
-            foreach (var innerCompanies in companies)
-            {
-                fileService.Write(
-                    Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + stcId + "_companies.csv",
-                    innerCompanies);
-                stcId++;
-            }
+
+            fileService.Write(
+                Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/" + "vnindex" + "_companies.csv",
+                companies);
         }
 
-        private IEnumerable<IEnumerable<Company>> GetAllCompanies()
+        private IEnumerable<Company> GetAllCompanies()
         {
-            var result = new List<List<Company>>();
-
             var stcId = "vnindex";
             var stcCompanies = new List<Company>();
-            for (var page = 1; page <= 16; page++)
-            {
-                WebDriver.Url = CoPhieu68Xpath.GetCompanyListUrl(stcId);
 
-                var rows = SeleniumService.FindElementsByXpath(CoPhieu68Xpath.CompanyTableRowXpath);
-                foreach (var row in rows)
+            WebDriver.Url = CoPhieu68Xpath.GetCompanyListUrl(stcId);
+
+            var rows = SeleniumService.FindElementsByXpath(CoPhieu68Xpath.CompanyTableRowXpath);
+            int dynamicId = 0;
+            foreach (var row in rows)
+            {
+                var innerTds = SeleniumService.FindInnerElementsByXpath(row, ".//td");
+                
+                stcCompanies.Add(new Company
                 {
-                    var innerTds = SeleniumService.FindInnerElementsByXpath(row, ".//td");
-                    stcCompanies.Add(new Company
-                    {
-                        Id = innerTds[1].Text,
-                        Name = innerTds[2].Text,
-                        FirstDate = StringToDateTimeConverter.Convert(innerTds[3].Text, "dd/mm/yyyy"),
-                        FirstTimeVolume = StringToNumberConverter.ConvertToDouble(innerTds[4].Text),
-                        FirstPrice = StringToNumberConverter.ConvertToDouble(innerTds[5].Text),
-                        CurrentVolume = StringToNumberConverter.ConvertToDouble(innerTds[6].Text),
-                        TreasuryShares = StringToNumberConverter.ConvertToDouble(innerTds[7].Text),
-                        ListedVolume = StringToNumberConverter.ConvertToDouble(innerTds[8].Text),
-                        ForeignOwn = StringToNumberConverter.ConvertToDouble(innerTds[9].Text),
-                        ForeignAllowedToBuy = StringToNumberConverter.ConvertToDouble(innerTds[10].Text),
-                        Price = StringToNumberConverter.ConvertToDouble(RemoveBraces(innerTds[11].Text)),
-                        MarketCap = StringToNumberConverter.ConvertToDouble(innerTds[12].Text),
-                        Chart = string.Empty
-                    });
-                }
+                    Id = ++dynamicId,
+                    TickerName = SeleniumService.FindInnerElementByXpath(innerTds[0], ".//div[1]").Text,
+                    FullName = SeleniumService.FindInnerElementByXpath(innerTds[0], ".//div[2]").Text,
+                    Price = ConvertToDouble(innerTds[1].Text),
+                    Changes = ConvertToDouble(innerTds[2].Text),
+                    VolumeTwentyFourHour = ConvertToDouble(innerTds[3].Text),
+                    VolumeFiftyTwoWeek = ConvertToDouble(innerTds[4].Text),
+                    VolumeRegistered = ConvertToDouble(innerTds[5].Text),
+                    MarketCap = ConvertToDouble(innerTds[6].Text),
+                    Chart = string.Empty
+                });
             }
 
-            result.Add(stcCompanies);
-
-
-            return result;
+            return stcCompanies;
         }
-
-        private string RemoveBraces(string value)
+        
+        private static double ConvertToDouble(string input)
         {
-            var input = value.Substring(0, value.IndexOf("\n"));
-            return input;
+            // Use InvariantCulture to ensure "." is interpreted as a decimal point
+            if (double.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+            {
+                return result;
+            }
+    
+            throw new FormatException($"Invalid number format: {input}");
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockMaster.Analysis;
 using StockMaster.Minions;
 using StockMaster.Minions.CoPhieu68;
-using StockMaster.Services.Files;
 using StockMaster.Services.FolderServices;
 using StockMaster.Services.Logger;
 
@@ -33,16 +30,16 @@ namespace StockMaster
 
             #region MainMethodGoesHere
 
-            var minion = new CoPhieu68Minion();
-            minion.Execute();
+            // var minion = new CoPhieu68Minion();
+            // minion.Execute();
 
             // var minion = new VnDirectMinion();
             // minion.Execute();
-            //
-            // var logger = provider.GetRequiredService<ILoggerService>();
-            //
-            // var logic = new StockFinder(logger);
-            // logic.CompareCurrentPriceWithRecommendedPrice();
+            
+            var logger = provider.GetRequiredService<ILoggerService>();
+            
+            var logic = new StockFinder(logger);
+            logic.CompareCurrentPriceWithRecommendedPrice();
 
             #endregion
 
@@ -57,15 +54,6 @@ namespace StockMaster
                     services.AddScoped<StockFinder>();
                     services.AddScoped<ILoggerService, FileLoggerService>();
                 });
-        }
-
-        static void ExemplifyScoping(IServiceProvider services, string scope)
-        {
-            using IServiceScope serviceScope = services.CreateScope();
-            var provider = serviceScope.ServiceProvider;
-
-            var logger = provider.GetRequiredService<ILoggerService>();
-            logger.Log("Logger is ready for service.");
         }
     }
 }

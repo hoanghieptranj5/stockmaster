@@ -25,17 +25,17 @@ namespace StockMaster.Analysis
         public void CompareCurrentPriceWithRecommendedPrice()
         {
             var fileService = new FileService.Builder().UseObjectStrategy().Build();
-            var companies = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
+            var companies = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/vnindex_companies.csv");
 
             foreach (var company in companies)
             {
-                _logger.Log("Collecting data for stock " + company.Id);
+                _logger.Log("Collecting data for stock " + company.TickerName);
 
                 var recommendations = fileService
                     .Read<VnDirectRecommendationOfCompany>(
                     Environment.CurrentDirectory
                     + "/" + FolderStructure.RECOMMENDS
-                    + "/" + company.Id + ".csv");
+                    + "/" + company.TickerName + ".csv");
 
                 foreach (var recommend in recommendations)
                 {
@@ -51,12 +51,12 @@ namespace StockMaster.Analysis
         /// HOSE only
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<string> GetStockIds()
+        public static IEnumerable<string> GetTickerId()
         {
             var fileService = new FileService.Builder().UseObjectStrategy().Build();
-            var records = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/1_companies.csv");
+            var records = fileService.Read<Company>(Environment.CurrentDirectory + "/" + FolderStructure.RESOURCES + "/vnindex_companies.csv");
             var stockIds = from record in records
-                           select record.Id;
+                           select record.TickerName;
 
             return stockIds.ToList();
         }

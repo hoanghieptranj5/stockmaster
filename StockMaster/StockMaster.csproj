@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
-    <Folder Include="Minions\" />
     <Folder Include="Constants\" />
     <Folder Include="Drivers\" />
     <Folder Include="Models\" />
@@ -25,7 +24,6 @@
     <Folder Include="Services\Files\Mappers\" />
     <Folder Include="Models\VnDirect\" />
     <Folder Include="Services\Converts\" />
-    <Folder Include="Models\CoPhieu69\" />
     <Folder Include="Constants\Xpaths\" />
     <Folder Include="Minions\VnDirect\" />
     <Folder Include="Minions\CoPhieu68\" />
