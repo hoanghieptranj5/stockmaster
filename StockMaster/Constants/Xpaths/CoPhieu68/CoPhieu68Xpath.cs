@@ -5,9 +5,9 @@ namespace StockMaster.Minions.Xpaths.CoPhieu68
     {
         public static readonly string CompanyTableRowXpath = "//tr[@onmouseover='hoverTR(this)']";
 
-        public static string GetCompanyListUrl(int stcId, int pageNumber)
+        public static string GetCompanyListUrl(string stcId)
         {
-            return string.Format("https://www.cophieu68.vn/companylist.php?keyword=&category=&stcid={0}&search=T%C3%ACm+Ki%E1%BA%BFm&currentPage={1}", stcId, pageNumber);
+            return string.Format("https://www.cophieu68.vn/market/markets.php?id=^vnindex", stcId);
         }
     }
 }

@@ -33,16 +33,16 @@ namespace StockMaster
 
             #region MainMethodGoesHere
 
-            //var minion = new CoPhieu68Minion();
-            //minion.Execute();
+            var minion = new CoPhieu68Minion();
+            minion.Execute();
 
-            //var minion = new VnDirectMinion();
-            //minion.Execute();
-
-            var logger = provider.GetRequiredService<ILoggerService>();
-
-            var logic = new StockFinder(logger);
-            logic.CompareCurrentPriceWithRecommendedPrice();
+            // var minion = new VnDirectMinion();
+            // minion.Execute();
+            //
+            // var logger = provider.GetRequiredService<ILoggerService>();
+            //
+            // var logic = new StockFinder(logger);
+            // logic.CompareCurrentPriceWithRecommendedPrice();
 
             #endregion
 
